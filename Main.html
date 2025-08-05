@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abinash Rath - Portfolio</title>
+
+  <!-- Font Awesome CDN for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-papbJ7FvYWu0aNi5HraP9zVKfKnMdGRZ4GT5A/kHRyRRxF/QlL6vw3kxO3rIrVd8pmXLDqv7QheP1Y9f9nYzkg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* --- Reset & base --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background-color 0.4s, color 0.4s;
+    }
+    body.light {
+      background-color: #fefefe;
+      color: #222;
+    }
+    a {
+      color: #4ea1d3;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #6fc3ff;
+    }
+
+    /* --- Navbar --- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background-color: #1f1f1fcc;
+      backdrop-filter: saturate(180%) blur(12px);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      transition: background-color 0.3s;
+    }
+    body.light nav {
+      background-color: #fffccccc;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      user-select: none;
+      letter-spacing: 0.05em;
+      color: inherit;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      user-select: none;
+    }
+    nav ul li {
+      font-weight: 600;
+    }
+    nav ul li a {
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #4ea1d3;
+      color: #121212;
+    }
+    #darkModeToggle {
+      background: none;
+      border: 2px solid #4ea1d3;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      color: inherit;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+    }
+    #darkModeToggle:hover {
+      background-color: #4ea1d3;
+      color: #121212;
+    }
+
+    /* --- Main content --- */
+    main {
+      max-width: 900px;
+      margin: 100px auto 40px;
+      padding: 0 1rem;
+    }
+    section {
+      margin-bottom: 4rem;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      border-left: 5px solid #4ea1d3;
+      padding-left: 1rem;
+      user-select: none;
+    }
+    p, li {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    ul {
+      list-style: disc inside;
+      margin-left: 0.5rem;
+    }
+
+    /* --- About Section --- */
+    #about p {
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    /* --- Education & Experience logos --- */
+    .logos-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+      align-items: center;
+    }
+    .logo-item {
+      flex: 1 1 100px;
+      max-width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      user-select: none;
+      cursor: default;
+      transition: transform 0.3s ease;
+    }
+    .logo-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      filter: grayscale(70%);
+      transition: filter 0.3s ease;
+    }
+    .logo-item:hover img {
+      filter: none;
+      transform: scale(1.1);
+    }
+    .logo-caption {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+    body.light .logo-caption {
+      color: #555;
+    }
+
+    /* --- Skills Section --- */
+    #skills .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      margin-top: 1rem;
+    }
+    .skill-item {
+      flex: 0 0 100px;
+      background-color: #222;
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    body.light .skill-item {
+      background-color: #eee;
+      color: #222;
+    }
+    .skill-item:hover {
+      background-color: #4ea1d3;
+      color: #121212;
+    }
+    .skill-item i {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .skill-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* --- Contact Form --- */
+    form#contactForm {
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    label {
+      font-weight: 600;
+      user-select: none;
+    }
+    input, textarea {
+      padding: 0.8rem 1rem;
+      border-radius: 7px;
+      border: 1.5px solid #4ea1d3;
+      background-color: transparent;
+      color: inherit;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #6fc3ff;
+      box-shadow: 0 0 8px #6fc3ffaa;
+    }
+    button#sendBtn {
+      padding: 0.8rem 1.7rem;
+      background-color: #4ea1d3;
+      border: none;
+      border-radius: 7px;
+      font-weight: 700;
+      color: #121212;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      align-self: flex-start;
+    }
+    button#sendBtn:hover {
+      background-color: #6fc3ff;
+    }
+    #statusMessage {
+      font-weight: 600;
+      margin-top: 0.6rem;
+      user-select: none;
+    }
+    #statusMessage.success {
+      color: #4BB543;
+    }
+    #statusMessage.error {
+      color: #FF4C4C;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 1rem 1rem 3rem;
+      font-size: 0.9rem;
+      color: #777;
+      user-select: none;
+    }
+    body.light footer {
+      color: #555;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 650px) {
+      nav ul {
+        gap: 1rem;
+      }
+      nav .logo {
+        font-size: 1.3rem;
+      }
+      main {
+        margin: 90px 1rem 40px;
+      }
+      .logos-container {
+        justify-content: center;
+      }
+      .skill-item {
+        flex: 0 0 45%;
+      }
+    }
+    @media (max-width: 400px) {
+      .skill-item {
+        flex: 0 0 90%;
+      }
+      nav {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">Abinash Rath</div>
+    <ul>
+      <li><a href="#about" class="active">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button id="darkModeToggle" aria-label="Toggle dark mode">Light Mode</button>
+  </nav>
+
+  <main>
+    <!-- About Section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Hi! I’m <strong>Abinash Rath</strong> from Bhubaneswar, Odisha.<br />
+        I completed my schooling at <em>VEMS</em> and my B.Tech degree from <em>ITER (2020-2024)</em>.<br />
+        Currently, I work at <strong>ESSPL</strong> as a Database Administrator focusing on EDI database management.
+      </p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="logos-container">
+        <div class="logo-item" title="VEMS School">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/2/20/Logo_of_Indian_School_Certificate_Examination.svg/120px-Logo_of_Indian_School_Certificate_Examination.svg.png"
+            alt="VEMS School Logo"
+          />
+          <div class="logo-caption">VEMS</div>
+        </div>
+        <div class="logo-item" title="ITER">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/66/ITER_Logo.svg/120px-ITER_Logo.svg.png"
+            alt="ITER Logo"
+          />
+          <div class="logo-caption">ITER (2020-2024)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2>Work Experience</h2>
+      <div class="logos-container">
+        <div class="logo-item" title="ESSPl">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Esspl_Logo.png/120px-Esspl_Logo.png"
+            alt="ESSPl Logo"
+            onerror="this.style.display='none'"
+          />
+          <div class="logo-caption">ESSPl - DBA (EDI Database)</div>
+        </div>
+      </div>
+      <p>
+        Working at ESSPL as a Database Administrator specializing in EDI database checking and management.
+      </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skill-list">
+        <div class="skill-item" title="Database Administration">
+          <i class="fa-solid fa-database"></i>
+          <div class="skill-name">DBA</div>
+        </div>
+        <div class="skill-item" title="JavaScript">
+          <i class="fa-brands fa-js-square"></i>
+          <div class="skill-name">JavaScript</div>
+        </div>
+        <div class="skill-item" title="HTML5">
+          <i class="fa-brands fa-html5"></i>
+          <div class="skill-name">HTML5</div>
+        </div>
+        <div class="skill-item" title="CSS3">
+          <i class="fa-brands fa-css3-alt"></i>
+          <div class="skill-name">CSS3</div>
+        </div>
+        <div class="skill-item" title="Git">
+          <i class="fa-brands fa-git-alt"></i>
+          <div class="skill-name">Git</div>
+        </div>
+        <div class="skill-item" title="Linux">
+          <i class="fa-brands fa-linux"></i>
+          <div class="skill-name">Linux</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form id="contactForm" novalidate>
+        <label for="name">Name *</label>
+        <input
+          type="text"
+          id="name"
+          name="user_name"
+          required
+          autocomplete="name"
+          placeholder="Your full name"
+          aria-required="true"
+        />
+
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          name="user_email"
+          required
+          autocomplete="email"
+          placeholder="your.email@example.com"
+          aria-required="true"
+        />
+
+        <label for="message">Message *</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          placeholder="Write your message here..."
+          aria-required="true"
+        ></textarea>
+
+        <button type="submit" id="sendBtn">Send Message</button>
+        <div id="statusMessage" role="alert" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Abinash Rath. All rights reserved.
+  </footer>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <script>
+    // Initialize EmailJS with your user ID - replace 'YOUR_USER_ID' with your EmailJS user ID
+    emailjs.init('YOUR_USER_ID');
+
+    // Dark Mode Toggle
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    // Remember mode in localStorage
+    if (localStorage.getItem('darkMode') === 'false') {
+      body.classList.add('light');
+      toggleBtn.textContent = 'Dark Mode';
+    }
+
+    function updateToggleButton() {
+      toggleBtn.textContent = body.classList.contains('light') ? 'Dark Mode' : 'Light Mode';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('light');
+      localStorage.setItem('darkMode', body.classList.contains('light') ? 'false' : 'true');
+      updateToggleButton();
+    });
+
+    updateToggleButton();
+
+    // Highlight active nav item based on scroll position
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 120; // Offset for nav height + margin
+
+      navLinks.forEach(link => {
+        const section = document.querySelector(link.hash);
+        if (section) {
+          if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        }
+      });
+    });
+
+    // Contact Form Submission
+    const contactForm = document.getElementById('contactForm');
+    const statusMessage = document.getElementById('statusMessage');
+
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      statusMessage.textContent = 'Sending...';
+      statusMessage.className = '';
+
+      const templateParams = {
+        user_name: contactForm.user_name.value,
+        user_email: contactForm.user_email.value,
+        message: contactForm.message.value,
+      };
+
+      // Replace with your EmailJS Service ID and Template ID
+      emailjs
+        .send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        .then(() => {
+          statusMessage.textContent = 'Message sent successfully!';
+          statusMessage.className = 'success';
+          contactForm.reset();
+        })
+        .catch((error) => {
+          console.error('EmailJS error:', error);
+          statusMessage.textContent = 'Failed to send message. Please try again.';
+          statusMessage.className = 'error';
+        });
+    });
+  </script>
+</body>
+</html>
